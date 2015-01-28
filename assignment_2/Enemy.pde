@@ -6,13 +6,14 @@ class Enemy
   color colour;
   boolean alive;
   int health;
+  int speed = 2;
  
   Enemy()
   {
     alive = true;
     health = 2;
     location = new PVector((int) random(0, (displayWidth/enemySize)), (int) random((-displayHeight/enemySize), 0));
-    velocity = new PVector(0, 1);
+    velocity = new PVector(0, speed);
   }
   
   Enemy(int enemySize, color colour)

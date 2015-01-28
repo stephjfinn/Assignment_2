@@ -23,6 +23,7 @@ class Player
   float timer = 0.0f;
   int score;
   int[] healthBar = new int[10];
+  int speed = 2;
     
   Player()
   {
@@ -87,11 +88,11 @@ class Player
       {
         theta -= 0.1f;
       }
-      position.y -= 1;
+      position.y -= speed;
     }
     if (checkKey(down) && position.y < height)
     {
-      position.y += 1;
+      position.y += speed;
     }
     if (checkKey(left) && position.x > 0)
     {
@@ -99,7 +100,7 @@ class Player
       {
         theta -= 0.1f;
       }
-      position.x -= 1;
+      position.x -= speed;
     }    
     if (checkKey(right) && position.x < width)
     {
@@ -107,7 +108,7 @@ class Player
       {
         theta += 0.1f;
       }
-      position.x += 1;
+      position.x += speed;
     }
     if (checkKey(start))
     {
@@ -164,6 +165,8 @@ class Player
     
     if (players.get(0).health > 0)
     {
+      players.get(0).healthBar[(players.get(0).health-1)] = 1;
+      players.get(0).healthBar[(players.get(0).health-2)] = 1;
       for(int i=0; i < 10; i++)
       {
         if (players.get(0).healthBar[i] == 1)

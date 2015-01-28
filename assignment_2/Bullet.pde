@@ -10,6 +10,7 @@ class Bullet
   color colour;
   boolean alive;
   PVector velocity;
+  float speed = 10.0f;
   
   Bullet()
   {
@@ -27,10 +28,9 @@ class Bullet
     }
     forward.x = sin(theta);
     forward.y = -cos(theta);
-    float speed = 10.0f;
  
     PVector velocity = PVector.mult(forward, speed);
-    position.add(forward);
+    position.add(velocity);
         
   }
   
