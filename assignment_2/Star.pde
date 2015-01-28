@@ -41,7 +41,6 @@ class Star
         int y = (int) random((-screenHeight/starSize), 0);
         y = y * starSize;
         location.y = y;
-        println("respawn");
         alive = true;
       }
     }

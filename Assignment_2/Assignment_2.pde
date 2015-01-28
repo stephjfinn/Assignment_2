@@ -20,9 +20,16 @@ PFont gameOver;
 PFont playAgain;
 PFont score;
 
+import ddf.minim.*;
+Minim minim;
+AudioPlayer boing;
+AudioPlayer chaChing;
+AudioPlayer pew;
+
 void setup()
 {
   size(500, 500);
+  minim = new Minim(this);
   setUpPlayerControllers();
   setUpEnemies();
   setUpStars();
@@ -33,6 +40,9 @@ void setup()
   gameOver = loadFont("ARDELANEY-48.vlw");
   playAgain = loadFont("Andalus-30.vlw");
   score = loadFont("ARJULIAN-15.vlw");
+  chaChing = minim.loadFile("cha_ching.wav");
+  boing = minim.loadFile("boing(2).wav");
+  pew = minim.loadFile("pew.wav");
 }
 
 void draw()
@@ -195,7 +205,6 @@ void setUpStars()
 {
   for(int i = 0; i < numOfStars; i++)
   {
-    println("star");
     Star s = new Star(starSize, color(200));
     int x = (int) random(0, (screenWidth/starSize));
     x = x * starSize;
@@ -223,9 +232,9 @@ void bulletCollision()
              enemies.get(j).health -= 1;
              if(enemies.get(j).health <= 0)
              {
+               pewSound();
                enemies.get(j).alive = false;
                int player = bullets.get(i).player;
-               println(player);
                players.get(player).score += 1;
                if (players.get(player).score%10 == 0)
                {
@@ -254,6 +263,7 @@ void playerCollision()
              enemies.get(j).alive = false;
              if(players.get(i).invincible == false)
              {
+               boingSound();
                players.get(i).health -= 1;
                players.get(i).healthBar[players.get(i).health] = 0;
                if(players.get(i).health <= 1)
@@ -286,6 +296,7 @@ void playerCollision()
         {
           if(stars.get(j).alive == true)
           {
+             chaChingSound();
              stars.get(j).alive = false;
              players.get(i).invincible = true;
           }
@@ -293,4 +304,25 @@ void playerCollision()
       }
     }
   }
+}
+
+void boingSound()
+{
+  //activates enemy collision sound
+  boing.rewind();
+  boing.play();
+}
+
+void chaChingSound()
+{
+  //ativates pointsBlock collision sound
+  chaChing.rewind();
+  chaChing.play();
+}
+
+void pewSound()
+{
+  //activates bullet collison sound
+  pew.rewind();
+  pew.play();
 }
