@@ -74,6 +74,7 @@ class Player
       if(timer > toPass)
       {
         invincible = false;
+        timer = 0.0f;
       }
     }
     if (checkKey(up) && position.y > 0)
@@ -120,6 +121,7 @@ class Player
         Bullet b = new Bullet();
         b.position = position.get();
         b.theta = theta;
+        b.player = index;
         bullets.add(b);
         
         ellapsed = 0.0f;

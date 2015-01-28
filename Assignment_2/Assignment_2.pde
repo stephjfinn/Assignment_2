@@ -157,11 +157,11 @@ void endScreen()
   text("GAME OVER", 50, 150);
   textFont(playAgain, 40);
   fill(241, 85, 0);
-  if (players.get(0).score > players.get(1).score)
+  if (loser == 1)
   {
     text("PLAYER ONE WINS", 90, 240);
   }
-  else
+  else if (loser == 0)
   {
     text("PLAYER TWO WINS", 90, 240);
   }
@@ -172,7 +172,7 @@ void endScreen()
   text("player two: " + players.get(1).score, 180, 310);
   if (keyPressed == true && key == '\n')
   {
-    splashScreens = 1;
+    splashScreens = 0;
   }
 }
 
@@ -195,6 +195,7 @@ void setUpStars()
 {
   for(int i = 0; i < numOfStars; i++)
   {
+    println("star");
     Star s = new Star(starSize, color(200));
     int x = (int) random(0, (screenWidth/starSize));
     x = x * starSize;
@@ -224,7 +225,12 @@ void bulletCollision()
              {
                enemies.get(j).alive = false;
                int player = bullets.get(i).player;
+               println(player);
                players.get(player).score += 1;
+               if (players.get(player).score%10 == 0)
+               {
+                 players.get(player).health += 1;
+               }
              }
           }
         }
@@ -253,12 +259,17 @@ void playerCollision()
                if(players.get(i).health <= 1)
                {
                  players.get(i).alive = false;
+                 loser = i;
                  splashScreens = 2;
                }
              }
              else
              {
                players.get(i).score += 1;
+               if (players.get(i).score%10 == 0)
+               {
+                 players.get(i).health += 1;
+               }
              }
           }
         }

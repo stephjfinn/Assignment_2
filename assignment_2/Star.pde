@@ -41,13 +41,15 @@ class Star
         int y = (int) random((-screenHeight/starSize), 0);
         y = y * starSize;
         location.y = y;
+        println("respawn");
+        alive = true;
       }
     }
   }
   
   void display()
   {
-    if(flash)
+    if(flash == true)
     {
       image(star1, location.x, location.y);
     }
