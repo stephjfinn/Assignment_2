@@ -166,7 +166,10 @@ class Player
     if (players.get(0).health > 0)
     {
       players.get(0).healthBar[(players.get(0).health-1)] = 1;
-      players.get(0).healthBar[(players.get(0).health-2)] = 1;
+      if (players.get(0).health-1 != 0)
+      {
+        players.get(0).healthBar[(players.get(0).health-2)] = 1;
+      }
       for(int i=0; i < 10; i++)
       {
         if (players.get(0).healthBar[i] == 1)

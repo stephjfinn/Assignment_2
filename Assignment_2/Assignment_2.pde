@@ -15,6 +15,7 @@ PImage enemy;
 PImage star1;
 PImage star2;
 PImage startscreen;
+PImage bg;
 int splashScreens = 0;
 PFont gameOver;
 PFont playAgain;
@@ -37,6 +38,7 @@ void setup()
   star1 = loadImage("star1.png");
   star2 = loadImage("star2.png");
   startscreen = loadImage("start.png");
+  bg = loadImage("bg.png");
   gameOver = loadFont("ARDELANEY-48.vlw");
   playAgain = loadFont("Andalus-30.vlw");
   score = loadFont("ARJULIAN-15.vlw");
@@ -161,7 +163,7 @@ void startScreen()
 
 void endScreen()
 {
-  background(0);
+  image(bg, 0, 0);
   textFont(gameOver, 70);
   fill(255, 48, 141);
   text("GAME OVER", 50, 150);
